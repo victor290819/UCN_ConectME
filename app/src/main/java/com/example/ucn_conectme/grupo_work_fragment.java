@@ -2,11 +2,13 @@ package com.example.ucn_conectme;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,10 +37,10 @@ import java.util.Set;
 public class grupo_work_fragment extends Fragment {
 
     private View fragmento_grupo_work;
-    private DatabaseReference rockref,gruporef;
+    private DatabaseReference rockref, gruporef;
     private ListView grupoitem;
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> ListaGrupo= new ArrayList<>();
+    private ArrayList<String> ListaGrupo = new ArrayList<>();
 
 
     @Override
@@ -47,7 +49,16 @@ public class grupo_work_fragment extends Fragment {
         fragmento_grupo_work = view;
         rockref = FirebaseDatabase.getInstance().getReference().child("Grupos");
 
+      grupoitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              String CurrenGrupoNombre = parent.getItemAtPosition(position).toString();
+              Intent intent = new Intent(getContext(), GrupoChatActivity.class);
+              intent.putExtra("nombregrupo",CurrenGrupoNombre);
+              startActivity(intent);
 
+          }
+      });
         LinearLayout btncreargrupo = view.findViewById(R.id.BtnCrearGrupo);
 
 
@@ -61,13 +72,11 @@ public class grupo_work_fragment extends Fragment {
         });
 
         IniciarLista();
-       MostrarListaGrupo();
-
+        MostrarListaGrupo();
 
 
         return fragmento_grupo_work;
     }
-
 
 
     private void creargrupo() {
@@ -107,14 +116,13 @@ public class grupo_work_fragment extends Fragment {
         rockref.child(nombregr).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                {
-                    Toast.makeText(getActivity(),"grupo creado",Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(getActivity(), "grupo creado", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } else {
 
                     String error = task.getException().getMessage().toString();
-                    Toast.makeText(getActivity(),"Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -122,19 +130,20 @@ public class grupo_work_fragment extends Fragment {
 
     }
 
-    private  void IniciarLista(){
-        grupoitem= (ListView) fragmento_grupo_work.findViewById(R.id.listagrupo);
-        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,ListaGrupo);
+    private void IniciarLista() {
+        grupoitem = (ListView) fragmento_grupo_work.findViewById(R.id.listagrupo);
+        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, ListaGrupo);
         grupoitem.setAdapter(arrayAdapter);
     }
+
     private void MostrarListaGrupo() {
 
         rockref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Set<String> set =new HashSet<>();
-                Iterator iterator= snapshot.getChildren().iterator();
-                while(iterator.hasNext()){
+                Set<String> set = new HashSet<>();
+                Iterator iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()) {
 
                     set.add(((DataSnapshot) iterator.next()).getKey());
 
@@ -146,7 +155,8 @@ public class grupo_work_fragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
 }
