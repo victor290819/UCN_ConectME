@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -13,6 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class GrupoChatActivity extends AppCompatActivity {
+    private Toolbar toolbar;
+    private ImageButton enviarmensaje;
+    private EditText mensajeUsuario;
+    private ScrollView scrollView;
+
+    private TextView vermensajes;
 
     private String CurrentGrupoNombre, CurrenUserID, CurrenUserName;
     private FirebaseAuth auth;
@@ -29,8 +40,11 @@ public class GrupoChatActivity extends AppCompatActivity {
         Userref = FirebaseDatabase.getInstance().getReference().child("Usuarios");
 
         informaciouser();
+        iniciarobjetos();
+    }
 
-
+    private void iniciarobjetos() {
+        toolbar=(Toolbar)findViewById(R.id.grupo_chat_bar_layout);
 
     }
 
