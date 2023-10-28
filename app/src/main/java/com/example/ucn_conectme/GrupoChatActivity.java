@@ -83,6 +83,7 @@ public class GrupoChatActivity extends AppCompatActivity {
             mensajeinformacion.put("mensaje",mensaje);
             mensajeinformacion.put("Fecha", Fecha);
             mensajeinformacion.put("hora", Hora);
+            GrupoMensajekey.updateChildren(mensajeinformacion);
 
 
 
