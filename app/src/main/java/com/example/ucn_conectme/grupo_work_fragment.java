@@ -48,8 +48,10 @@ public class grupo_work_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_grupo_work, container, false);
         fragmento_grupo_work = view;
         rockref = FirebaseDatabase.getInstance().getReference().child("Grupos");
+        grupoitem = view.findViewById(R.id.listagrupo);
 
-      grupoitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        grupoitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
           @Override
           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
               String CurrenGrupoNombre = parent.getItemAtPosition(position).toString();
