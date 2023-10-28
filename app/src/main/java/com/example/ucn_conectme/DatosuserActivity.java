@@ -83,18 +83,19 @@ public class DatosuserActivity extends AppCompatActivity {
             map.put("telefono", tel);
             map.put("carrera", carr);
 
-            userref.updateChildren(map).addOnCompleteListener(new OnCompleteListener() {
+            userref.child(CurrentUserID).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
-                public void onComplete(@NonNull Task task) {
+                public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(DatosuserActivity.this, "completado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DatosuserActivity.this, "Completado", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         lanzar();
                     } else {
-                        Toast.makeText(DatosuserActivity.this, "error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DatosuserActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+
         }
     }
 
