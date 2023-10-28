@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class GrupoChatActivity extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class GrupoChatActivity extends AppCompatActivity {
 
     private String CurrentGrupoNombre, CurrenUserID, CurrenUserName,Fecha,Hora;
     private FirebaseAuth auth;
-    private DatabaseReference Userref;
+    private DatabaseReference Userref,Gruporef, GrupoMensajekey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class GrupoChatActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         CurrenUserID = auth.getCurrentUser().getUid();
         Userref = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        Gruporef=FirebaseDatabase.getInstance().getReference().child("Grupos").child(CurrentGrupoNombre);
 
         informaciouser();
         iniciarobjetos();
@@ -51,6 +53,7 @@ public class GrupoChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GuardarMensajeDB();
+                mensajeUsuario.setText("");
 
             }
         });
@@ -58,6 +61,7 @@ public class GrupoChatActivity extends AppCompatActivity {
 
     private void GuardarMensajeDB() {
             String mensaje = mensajeUsuario.getText().toString();
+            String mensajekey=Gruporef.push().getKey();
         if (TextUtils.isEmpty(mensaje)){
             Toast.makeText(this,"ingrese un mensaje",Toast.LENGTH_SHORT).show();
 
@@ -66,7 +70,21 @@ public class GrupoChatActivity extends AppCompatActivity {
             SimpleDateFormat Currentfecha = new SimpleDateFormat("MMM dd,yyyy");
             Fecha=Currentfecha.format(fechacalendar.getTime());
 
-            Hora= Cu
+            Calendar horacalendar = Calendar.getInstance();
+            SimpleDateFormat Currenthora = new SimpleDateFormat("hh:mm a");
+            Hora=Currenthora.format(horacalendar.getTime());
+
+            HashMap<String,Object> mensajegrupo= new HashMap<>();
+            Gruporef.updateChildren (mensajegrupo) ;
+            GrupoMensajekey=Gruporef.child(mensajekey) ;
+
+            HashMap<String,Object>mensajeinformacion= new HashMap<>();
+            mensajeinformacion.put("nombre",CurrenUserName);
+            mensajeinformacion.put("mensaje",mensaje);
+            mensajeinformacion.put("Fecha", Fecha);
+            mensajeinformacion.put("hora", Hora);
+
+
 
         }
     }
