@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:background="#087541"
+        android:orientation="horizontal">
+
+        <!-- Tu título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UCN ConectME"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            tools:ignore="HardcodedText" />
+
+        <!-- Espacio en blanco para separar título e iconos -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/baseline_search_24"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/camaraactivity"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_camera_alt_24"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/menumain"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@drawable/baseline_menu_24"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+
+    </LinearLayout>
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@id/headerLayout">
+
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/tab"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="#087541"
+           tools:ignore="SpeakableTextPresentCheck">
+
+       </com.google.android.material.tabs.TabLayout>
+
+       <androidx.viewpager.widget.ViewPager
+           android:id="@+id/viewPager"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           tools:ignore="SpeakableTextPresentCheck" />
+
+   </LinearLayout>
+
+
+
+
+</RelativeLayout>

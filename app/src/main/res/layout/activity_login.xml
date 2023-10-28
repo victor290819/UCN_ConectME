@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#087541"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/idLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ucnlogo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ctuser"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/idLogo"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edittext_border"
+        app:hintEnabled="true"
+        app:hintTextColor="#fff"
+        app:startIconDrawable="@drawable/baseline_person_24">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtusuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittexborder2"
+            android:hint="Correo"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#fff"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ctContraseña"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ctuser"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edittext_border"
+        app:hintEnabled="true"
+        app:hintTextColor="#fff"
+        app:startIconDrawable="@drawable/baseline_key_24">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittexborder2"
+            android:hint="Contraseña"
+            android:inputType="textWebPassword"
+            android:maxLines="1"
+            android:textColor="#fff"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnlogin"
+        android:text="Login"
+        app:backgroundTint="#055060"
+        android:textColor="#fff"
+        android:layout_below="@id/ctContraseña"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:strokeColor="#195070"
+        app:strokeWidth="3dp"/>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Olvidastes tu Contraseña"
+       android:layout_below="@id/btnlogin"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="20dp"
+       android:textColor="#fff"
+       android:textStyle="bold"/>
+
+</RelativeLayout>

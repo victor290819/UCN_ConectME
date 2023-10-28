@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Ucn_ConectMe" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+
+    <style name="Theme.Ucn_ConectMe" parent="Base.Theme.Ucn_ConectMe" >
+        <item name="android:statusBarColor">@color/colorBarraEstado</item>
+    </style>
+</resources>

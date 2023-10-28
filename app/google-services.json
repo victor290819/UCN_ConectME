@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "616002895331",
+    "project_id": "ucn-conectme-460ad",
+    "storage_bucket": "ucn-conectme-460ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616002895331:android:b90c398c7c14c32132f4d6",
+        "android_client_info": {
+          "package_name": "com.example.ucn_conectme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6qALmgWdobX4xkdR7g3TAvR15ftvV3UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,14 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/activityConfiguracion"
+        android:title="Configuracion" />
+    <item
+        android:id="@+id/menu_item2"
+        android:title="Mi Perfil" />
+    <!-- Agrega los otros elementos aquí -->
+    <item
+        android:id="@+id/menu_item3"
+        android:title="Cerrar Secion" />
+    <!-- Agrega los otros elementos aquí -->
+</menu>
