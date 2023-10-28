@@ -17,10 +17,12 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,15 +54,15 @@ public class grupo_work_fragment extends Fragment {
 
 
         grupoitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              String CurrenGrupoNombre = parent.getItemAtPosition(position).toString();
-              Intent intent = new Intent(getContext(), GrupoChatActivity.class);
-              intent.putExtra("nombregrupo",CurrenGrupoNombre);
-              startActivity(intent);
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String CurrenGrupoNombre = parent.getItemAtPosition(position).toString();
+                Intent intent = new Intent(getContext(), GrupoChatActivity.class);
+                intent.putExtra("nombregrupo", CurrenGrupoNombre);
+                startActivity(intent);
 
-          }
-      });
+            }
+        });
         LinearLayout btncreargrupo = view.findViewById(R.id.BtnCrearGrupo);
 
 
@@ -131,6 +133,10 @@ public class grupo_work_fragment extends Fragment {
         });
 
     }
+
+
+
+
 
     private void IniciarLista() {
         grupoitem = (ListView) fragmento_grupo_work.findViewById(R.id.listagrupo);

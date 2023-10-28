@@ -1,6 +1,7 @@
 package com.example.ucn_conectme;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class GrupoChatActivity extends AppCompatActivity {
 
@@ -47,6 +50,8 @@ public class GrupoChatActivity extends AppCompatActivity {
         Userref = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         Gruporef=FirebaseDatabase.getInstance().getReference().child("Grupos").child(CurrentGrupoNombre);
 
+
+
         informaciouser();
         iniciarobjetos();
         enviarmensaje.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +59,43 @@ public class GrupoChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 GuardarMensajeDB();
                 mensajeUsuario.setText("");
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
+            }
+        });
+    }
+    public void onStart() {
+        super.onStart();
+        Gruporef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.exists()) {
+                    mostrarMensajes(snapshot);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.exists()) {
+                    CurrenUserName=snapshot.child("nombre").getValue().toString();
+                }
+
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
@@ -115,4 +157,18 @@ public class GrupoChatActivity extends AppCompatActivity {
             }
         });
     }
+    private void mostrarMensajes(DataSnapshot snapshot) {
+        Iterator iterator = snapshot.getChildren().iterator();
+        while (iterator.hasNext()){
+            String nombre = (String) ((DataSnapshot)iterator.next()).getValue();
+            String Fecha = (String) ((DataSnapshot)iterator.next()).getValue();
+            String mensaje = (String) ((DataSnapshot)iterator.next()).getValue();
+            String hora = (String) ((DataSnapshot)iterator.next()).getValue();
+
+            vermensajes.append(nombre + "\n" + mensaje +"\n"+ Fecha + " "+hora +"\n\n\n"  );
+
+            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+        }
+    }
+
 }
