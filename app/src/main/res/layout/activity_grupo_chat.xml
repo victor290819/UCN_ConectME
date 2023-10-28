@@ -53,15 +53,18 @@
         >
 
         <EditText
+            android:hint="escribir mensaje"
             android:id="@+id/texto_grupo_chat"
-            android:layout_width="270dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             />
-        <ImageView
+        <ImageButton
             android:id="@+id/enviar_mensaje_grupo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/baseline_send_24"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_send_24"
+            />
 
 
 

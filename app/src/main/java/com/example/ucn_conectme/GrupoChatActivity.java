@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,15 +20,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class GrupoChatActivity extends AppCompatActivity {
-    private Toolbar toolbar;
+
     private ImageButton enviarmensaje;
     private EditText mensajeUsuario;
     private ScrollView scrollView;
 
-    private TextView vermensajes;
+    private TextView vermensajes,titulogrupo;
 
-    private String CurrentGrupoNombre, CurrenUserID, CurrenUserName;
+    private String CurrentGrupoNombre, CurrenUserID, CurrenUserName,Fecha,Hora;
     private FirebaseAuth auth;
     private DatabaseReference Userref;
 
@@ -41,11 +47,36 @@ public class GrupoChatActivity extends AppCompatActivity {
 
         informaciouser();
         iniciarobjetos();
+        enviarmensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GuardarMensajeDB();
+
+            }
+        });
+    }
+
+    private void GuardarMensajeDB() {
+            String mensaje = mensajeUsuario.getText().toString();
+        if (TextUtils.isEmpty(mensaje)){
+            Toast.makeText(this,"ingrese un mensaje",Toast.LENGTH_SHORT).show();
+
+        }else{
+            Calendar fechacalendar = Calendar.getInstance();
+            SimpleDateFormat Currentfecha = new SimpleDateFormat("MMM dd,yyyy");
+            Fecha=Currentfecha.format(fechacalendar.getTime());
+
+            Hora= Cu
+
+        }
     }
 
     private void iniciarobjetos() {
-        toolbar=(Toolbar)findViewById(R.id.grupo_chat_bar_layout);
-
+        titulogrupo=(TextView)findViewById(R.id.grupo_chat_bar_layout);
+        enviarmensaje=(ImageButton) findViewById(R.id.enviar_mensaje_grupo);
+        mensajeUsuario=(EditText)findViewById(R.id.texto_grupo_chat);
+        scrollView=(ScrollView)findViewById(R.id.mi_scroll_view);
+        vermensajes=(TextView) findViewById(R.id.grupo_chat_texto);
     }
 
     private void informaciouser() {
